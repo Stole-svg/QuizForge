@@ -284,6 +284,367 @@
         </a>
 
     </section>
+    
+<!-- FEATURED QUIZZES CAROUSEL -->
+
+<section class="carousel-section">
+
+```
+<h2>Featured Quizzes</h2>
+
+<div class="carousel">
+
+    <div class="slides">
+
+        <div class="slide">
+            <div class="slide-icon">🔬</div>
+            <h3>Science Quiz</h3>
+            <p>Test your knowledge of science.</p>
+            <a href="science.html">Start Quiz →</a>
+        </div>
+
+        <div class="slide">
+            <div class="slide-icon">📐</div>
+            <h3>Mathematics Quiz</h3>
+            <p>Challenge yourself with mathematics.</p>
+            <a href="maths.html">Start Quiz →</a>
+        </div>
+
+        <div class="slide">
+            <div class="slide-icon">🏏</div>
+            <h3>Cricket Quiz</h3>
+            <p>How much do you know about cricket?</p>
+            <a href="cricket.html">Start Quiz →</a>
+        </div>
+
+        <div class="slide">
+            <div class="slide-icon">🌍</div>
+            <h3>Geography Quiz</h3>
+            <p>Explore the world with geography.</p>
+            <a href="geography.html">Start Quiz →</a>
+        </div>
+
+    </div>
+
+    <!-- BUTTONS -->
+
+    <button class="prev" onclick="previousSlide()">❮</button>
+
+    <button class="next" onclick="nextSlide()">❯</button>
+
+</div>
+
+
+<!-- DOTS -->
+
+<div class="dots">
+
+    <span onclick="goToSlide(0)"></span>
+    <span onclick="goToSlide(1)"></span>
+    <span onclick="goToSlide(2)"></span>
+    <span onclick="goToSlide(3)"></span>
+
+</div>
+```
+
+</section>
+
+<style>
+
+    .carousel-section {
+        max-width: 900px;
+        margin: 70px auto;
+        padding: 0 25px;
+        text-align: center;
+    }
+
+    .carousel-section h2 {
+        font-size: 30px;
+        margin-bottom: 25px;
+    }
+
+    .carousel {
+        position: relative;
+        overflow: hidden;
+        border-radius: 18px;
+        background: white;
+        border: 1px solid #e5e7eb;
+    }
+
+    .slides {
+        display: flex;
+        transition: transform 0.4s ease;
+    }
+
+    .slide {
+        min-width: 100%;
+        padding: 60px 30px;
+    }
+
+    .slide-icon {
+        font-size: 50px;
+        margin-bottom: 15px;
+    }
+
+    .slide h3 {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    .slide p {
+        color: #6b7280;
+        margin-bottom: 25px;
+    }
+
+    .slide a {
+        display: inline-block;
+        padding: 11px 20px;
+        background: #2563eb;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+    }
+
+    .slide a:hover {
+        background: #1d4ed8;
+    }
+
+    /* ARROWS */
+
+    .prev,
+    .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        border: none;
+        background: white;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 18px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    }
+
+    .prev {
+        left: 15px;
+    }
+
+    .next {
+        right: 15px;
+    }
+
+    .prev:hover,
+    .next:hover {
+        background: #f0f4ff;
+    }
+
+    /* DOTS */
+
+    .dots {
+        margin-top: 15px;
+    }
+
+    .dots span {
+        display: inline-block;
+        width: 9px;
+        height: 9px;
+        margin: 5px;
+        background: #cbd5e1;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .dots span.active {
+        background: #2563eb;
+    }
+    /* FEATURED QUIZZES CAROUSEL */
+
+.carousel-section {
+    max-width: 900px;
+    margin: 70px auto;
+    padding: 0 25px;
+    text-align: center;
+}
+
+.carousel-section h2 {
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+.carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    background: white;
+    border: 1px solid #e5e7eb;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.4s ease;
+}
+
+.slide {
+    min-width: 100%;
+    padding: 60px 30px;
+}
+
+.slide-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.slide h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.slide p {
+    color: #6b7280;
+    margin-bottom: 25px;
+}
+
+.slide a {
+    display: inline-block;
+    padding: 11px 20px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.slide a:hover {
+    background: #1d4ed8;
+}
+
+/* CAROUSEL ARROWS */
+
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    border: none;
+    background: white;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+    font-size: 18px;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+.prev {
+    left: 15px;
+}
+
+.next {
+    right: 15px;
+}
+
+.prev:hover,
+.next:hover {
+    background: #f0f4ff;
+}
+
+/* CAROUSEL DOTS */
+
+.dots {
+    margin-top: 15px;
+}
+
+.dots span {
+    display: inline-block;
+
+    width: 9px;
+    height: 9px;
+
+    margin: 5px;
+
+    background: #cbd5e1;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+.dots span.active {
+    background: #2563eb;
+}
+
+</style>
+
+<script>
+
+    let currentSlide = 0;
+
+    const slides = document.querySelector(".slides");
+    const dots = document.querySelectorAll(".dots span");
+
+    function showSlide(index) {
+
+        if (index >= 4) {
+            currentSlide = 0;
+        }
+
+        else if (index < 0) {
+            currentSlide = 3;
+        }
+
+        else {
+            currentSlide = index;
+        }
+
+        slides.style.transform =
+            `translateX(-${currentSlide * 100}%)`;
+
+        updateDots();
+    }
+
+
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
+
+
+    function previousSlide() {
+        showSlide(currentSlide - 1);
+    }
+
+
+    function goToSlide(index) {
+        showSlide(index);
+    }
+
+
+    function updateDots() {
+
+        dots.forEach(dot => {
+            dot.classList.remove("active");
+        });
+
+        dots[currentSlide].classList.add("active");
+    }
+
+
+    updateDots();
+
+
+    /* AUTO SLIDE */
+
+    setInterval(() => {
+        nextSlide();
+    }, 5000);
+
+</script>
 
 
     <!-- DAILY CHALLENGE -->
