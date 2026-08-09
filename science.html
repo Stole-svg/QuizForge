@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Science Quiz | QuizForge</title>
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: #f5f7fb;
+        color: #172033;
+    }
+
+    /* NAVBAR */
+
+    nav {
+        height: 70px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 8%;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .logo {
+        text-decoration: none;
+        color: #2563eb;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .back {
+        text-decoration: none;
+        color: #4b5563;
+    }
+
+    .back:hover {
+        color: #2563eb;
+    }
+
+    /* QUIZ CONTAINER */
+
+    .quiz-container {
+        max-width: 750px;
+        margin: 60px auto;
+        padding: 0 20px;
+    }
+
+    .quiz-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .quiz-header h1 {
+        font-size: 38px;
+        margin-bottom: 8px;
+    }
+
+    .quiz-header p {
+        color: #6b7280;
+    }
+
+    /* PROGRESS */
+
+    .progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        color: #6b7280;
+        font-size: 14px;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: #e5e7eb;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 30px;
+    }
+
+    .progress {
+        height: 100%;
+        width: 5%;
+        background: #2563eb;
+        transition: width 0.3s ease;
+    }
+
+    /* QUESTION CARD */
+
+    .question-card {
+        background: white;
+        padding: 35px;
+        border-radius: 18px;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+    }
+
+    .question-number {
+        color: #2563eb;
+        font-weight: bold;
+        margin-bottom: 12px;
+    }
+
+    .question {
+        font-size: 24px;
+        line-height: 1.4;
+        margin-bottom: 25px;
+    }
+
+    /* OPTIONS */
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .option {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        background: white;
+        text-align: left;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .option:hover {
+        border-color: #2563eb;
+        background: #f5f8ff;
+    }
+
+    .option.selected {
+        border-color: #2563eb;
+        background: #eaf2ff;
+    }
+
+    .option.correct {
+        border-color: #16a34a;
+        background: #dcfce7;
+    }
+
+    .option.wrong {
+        border-color: #dc2626;
+        background: #fee2e2;
+    }
+
+    /* NEXT BUTTON */
+
+    .next-container {
+        margin-top: 25px;
+        text-align: right;
+    }
+
+    .next-button {
+        padding: 13px 25px;
+        border: none;
+        border-radius: 9px;
+        background: #2563eb;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .next-button:hover {
+        background: #1d4ed8;
+    }
+
+    .next-button:disabled {
+        background: #9ca3af;
+        cursor: not-allowed;
+    }
+
+    /* RESULTS */
+
+    .results {
+        display: none;
+        background: white;
+        padding: 50px 30px;
+        border-radius: 18px;
+        border: 1px solid #e5e7eb;
+        text-align: center;
+    }
+
+    .results-icon {
+        font-size: 60px;
+        margin-bottom: 15px;
+    }
+
+    .results h2 {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .score {
+        font-size: 48px;
+        font-weight: bold;
+        color: #2563eb;
+        margin-bottom: 10px;
+    }
+
+    .percentage {
+        color: #6b7280;
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    .result-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .result-buttons a,
+    .result-buttons button {
+        padding: 12px 20px;
+        border-radius: 9px;
+        text-decoration: none;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+    .retry {
+        border: none;
+        background: #2563eb;
+        color: white;
+    }
+
+    .home {
+        border: 1px solid #d1d5db;
+        color: #374151;
+        background: white;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+
+        nav {
+            padding: 0 5%;
+        }
+
+        .quiz-container {
+            margin-top: 35px;
+        }
+
+        .quiz-header h1 {
+            font-size: 32px;
+        }
+
+        .question-card {
+            padding: 25px;
+        }
+
+        .question {
+            font-size: 21px;
+        }
+
+        .result-buttons {
+            flex-direction: column;
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- NAVBAR -->
+
+<nav>
+
+    <a href="index.html" class="logo">
+        🧠 QuizForge
+    </a>
+
+    <a href="quizzes.html" class="back">
+        ← Back to Quizzes
+    </a>
+
+</nav>
+
+
+<!-- QUIZ -->
+
+<main class="quiz-container">
+
+    <div class="quiz-header">
+
+        <h1>🔬 Science Quiz</h1>
+
+        <p>Test your science knowledge!</p>
+
+    </div>
+
+
+    <!-- PROGRESS -->
+
+    <div id="quiz-area">
+
+        <div class="progress-info">
+
+            <span id="question-counter">
+                Question 1 of 20
+            </span>
+
+            <span id="score-display">
+                Score: 0
+            </span>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+            <div class="progress" id="progress"></div>
+
+        </div>
+
+
+        <!-- QUESTION -->
+
+        <div class="question-card">
+
+            <div
+                class="question-number"
+                id="question-number">
+                Question 1
+            </div>
+
+
+            <div
+                class="question"
+                id="question">
+            </div>
+
+
+            <div
+                class="options"
+                id="options">
+            </div>
+
+
+            <div class="next-container">
+
+                <button
+                    class="next-button"
+                    id="next-button"
+                    disabled>
+
+                    Next →
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RESULTS -->
+
+    <div
+        class="results"
+        id="results">
+
+        <div class="results-icon">
+            🎉
+        </div>
+
+        <h2>Quiz Complete!</h2>
+
+        <div
+            class="score"
+            id="final-score">
+            0 / 20
+        </div>
+
+        <div
+            class="percentage"
+            id="percentage">
+            0%
+        </div>
+
+
+        <div class="result-buttons">
+
+            <button
+                class="retry"
+                onclick="restartQuiz()">
+
+                Try Again
+
+            </button>
+
+
+            <a
+                href="quizzes.html"
+                class="home">
+
+                Back to Quizzes
+
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+    const questions = [
+
+        {
+            question: "What is the SI unit of force?",
+            options: ["Joule", "Newton", "Watt", "Pascal"],
+            answer: "Newton"
+        },
+
+        {
+            question: "Which organ pumps blood throughout the human body?",
+            options: ["Lungs", "Brain", "Heart", "Kidney"],
+            answer: "Heart"
+        },
+
+        {
+            question: "Which gas is most abundant in Earth's atmosphere?",
+            options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
+            answer: "Nitrogen"
+        },
+
+        {
+            question: "What is the process by which green plants make their food?",
+            options: ["Respiration", "Digestion", "Photosynthesis", "Transpiration"],
+            answer: "Photosynthesis"
+        },
+
+        {
+            question: "Which of these is a good conductor of electricity?",
+            options: ["Rubber", "Wood", "Plastic", "Copper"],
+            answer: "Copper"
+        },
+
+        {
+            question: "What is the boiling point of water at normal atmospheric pressure?",
+            options: ["50°C", "100°C", "150°C", "200°C"],
+            answer: "100°C"
+        },
+
+        {
+            question: "Which part of a plant absorbs water and minerals from the soil?",
+            options: ["Stem", "Leaves", "Flower", "Roots"],
+            answer: "Roots"
+        },
+
+        {
+            question: "Which planet is known as the Red Planet?",
+            options: ["Venus", "Jupiter", "Mars", "Mercury"],
+            answer: "Mars"
+        },
+
+        {
+            question: "What force pulls objects toward Earth?",
+            options: ["Friction", "Magnetism", "Gravity", "Buoyancy"],
+            answer: "Gravity"
+        },
+
+        {
+            question: "Which blood cells help fight infections?",
+            options: [
+                "Red blood cells",
+                "Platelets",
+                "White blood cells",
+                "Plasma"
+            ],
+            answer: "White blood cells"
+        },
+
+        {
+            question: "Which of the following is a chemical change?",
+            options: [
+                "Melting ice",
+                "Cutting paper",
+                "Dissolving sugar",
+                "Rusting of iron"
+            ],
+            answer: "Rusting of iron"
+        },
+
+        {
+            question: "What is the smallest unit of life?",
+            options: ["Tissue", "Organ", "Cell", "Atom"],
+            answer: "Cell"
+        },
+
+        {
+            question: "Which instrument is used to measure temperature?",
+            options: ["Barometer", "Ammeter", "Thermometer", "Speedometer"],
+            answer: "Thermometer"
+        },
+
+        {
+            question: "Which type of energy does a moving object possess?",
+            options: [
+                "Potential energy",
+                "Kinetic energy",
+                "Chemical energy",
+                "Nuclear energy"
+            ],
+            answer: "Kinetic energy"
+        },
+
+        {
+            question: "Which vitamin is mainly produced in our skin when exposed to sunlight?",
+            options: ["Vitamin A", "Vitamin B", "Vitamin D", "Vitamin K"],
+            answer: "Vitamin D"
+        },
+
+        {
+            question: "Which layer of Earth do we live on?",
+            options: ["Core", "Mantle", "Crust", "Inner core"],
+            answer: "Crust"
+        },
+
+        {
+            question: "What happens to most substances when they are heated?",
+            options: [
+                "They always shrink",
+                "They disappear",
+                "They generally expand",
+                "They become magnetic"
+            ],
+            answer: "They generally expand"
+        },
+
+        {
+            question: "Which simple machine is commonly used to draw water from a well?",
+            options: ["Lever", "Pulley", "Wedge", "Inclined plane"],
+            answer: "Pulley"
+        },
+
+        {
+            question: "Which gas do humans mainly breathe in for respiration?",
+            options: [
+                "Carbon dioxide",
+                "Nitrogen",
+                "Oxygen",
+                "Hydrogen"
+            ],
+            answer: "Oxygen"
+        },
+
+        {
+            question: "Which of these is NOT a renewable source of energy?",
+            options: [
+                "Solar energy",
+                "Wind energy",
+                "Hydroelectric energy",
+                "Coal"
+            ],
+            answer: "Coal"
+        }
+
+    ];
+
+
+    let currentQuestion = 0;
+    let score = 0;
+    let selected = false;
+
+
+    const questionElement =
+        document.getElementById("question");
+
+    const optionsElement =
+        document.getElementById("options");
+
+    const nextButton =
+        document.getElementById("next-button");
+
+    const questionCounter =
+        document.getElementById("question-counter");
+
+    const questionNumber =
+        document.getElementById("question-number");
+
+    const scoreDisplay =
+        document.getElementById("score-display");
+
+    const progress =
+        document.getElementById("progress");
+
+    const quizArea =
+        document.getElementById("quiz-area");
+
+    const results =
+        document.getElementById("results");
+
+
+    function loadQuestion() {
+
+        selected = false;
+
+        nextButton.disabled = true;
+
+        const current = questions[currentQuestion];
+
+
+        questionElement.textContent =
+            current.question;
+
+
+        questionNumber.textContent =
+            `Question ${currentQuestion + 1}`;
+
+
+        questionCounter.textContent =
+            `Question ${currentQuestion + 1} of ${questions.length}`;
+
+
+        scoreDisplay.textContent =
+            `Score: ${score}`;
+
+
+        progress.style.width =
+            `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+
+        optionsElement.innerHTML = "";
+
+
+        current.options.forEach(option => {
+
+            const button =
+                document.createElement("button");
+
+            button.classList.add("option");
+
+            button.textContent = option;
+
+
+            button.onclick = () => {
+
+                selectAnswer(button, option);
+
+            };
+
+
+            optionsElement.appendChild(button);
+
+        });
+
+    }
+
+
+    function selectAnswer(button, selectedAnswer) {
+
+        if (selected) {
+            return;
+        }
+
+        selected = true;
+
+        const correctAnswer =
+            questions[currentQuestion].answer;
+
+
+        const allOptions =
+            document.querySelectorAll(".option");
+
+
+        allOptions.forEach(option => {
+
+            if (option.textContent === correctAnswer) {
+
+                option.classList.add("correct");
+
+            }
+
+        });
+
+
+        if (selectedAnswer === correctAnswer) {
+
+            score++;
+
+            button.classList.add("correct");
+
+        }
+
+        else {
+
+            button.classList.add("wrong");
+
+        }
+
+
+        scoreDisplay.textContent =
+            `Score: ${score}`;
+
+
+        nextButton.disabled = false;
+
+    }
+
+
+    nextButton.addEventListener("click", () => {
+
+        currentQuestion++;
+
+
+        if (currentQuestion < questions.length) {
+
+            loadQuestion();
+
+        }
+
+        else {
+
+            showResults();
+
+        }
+
+    });
+
+
+    function showResults() {
+
+        quizArea.style.display = "none";
+
+        results.style.display = "block";
+
+
+        document.getElementById("final-score").textContent =
+            `${score} / ${questions.length}`;
+
+
+        const percentage =
+            Math.round((score / questions.length) * 100);
+
+
+        document.getElementById("percentage").textContent =
+            `${percentage}%`;
+
+    }
+
+
+    function restartQuiz() {
+
+        currentQuestion = 0;
+
+        score = 0;
+
+        results.style.display = "none";
+
+        quizArea.style.display = "block";
+
+        loadQuestion();
+
+    }
+
+
+    loadQuestion();
+
+</script>
+```
+
+</body>
+
+</html>
